@@ -1,0 +1,80 @@
+/* Guru Status: typography adjustments ONLY for wide desktop displays.
+   Standard laptop, tablet and mobile layouts are not affected. */
+@media screen and (min-width: 1680px) {
+  /* Section identifiers and editorial microcopy */
+  .eyebrow, .tiny-label, .section-kicker,
+  .completed-kicker, .completed-status, .completed-text-link,
+  .photo-tag, .image-caption, .completed-image-label,
+  .completed-gallery-note, .reality-gallery-overline,
+  .investment-overline, .investment-card-top,
+  .developer-overline, .developer-portfolio span,
+  .finish-comparison-intro .tiny-label,
+  .reality-gallery-film-label span,
+  .guest-reviews-eyebrow,
+  .showroom-carousel-heading .tiny-label,
+  .neighborhood-eyebrow {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* Larger, more legible paragraphs in the existing layout */
+  .hero-bottom p, .intro-right > p:not(.large-copy),
+  .split-copy > p, .amenity-top p, .apartments-heading p,
+  .quality-heading p, .quality-card p,
+  .investment-grid > div:first-child > p,
+  .completed-intro-aside p,
+  .finish-comparison-description p,
+  .developer-story-copy p,
+  .investment-heading-row p,
+  .guest-reviews-intro,
+  .reality-gallery-heading p,
+  .reality-gallery-film-label p,
+  .showroom-carousel-heading p,
+  .stack-gallery-heading p {
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  /* The reference screenshot: finishing section */
+  .finish-comparison-instruction {font-size: 13px; line-height: 1.6;}
+  .finish-comparison-disclaimer {font-size: 14px; line-height: 1.7; max-width: 850px;}
+  .finish-room-tab {font-size: 14px; padding: 11px 18px;}
+  .finish-side-label {font-size: 13px;}
+  .finish-comparison-tip, .finish-comparison-actions button {font-size: 12px;}
+
+  /* Secondary descriptions, supporting labels and controls site-wide */
+  .nav nav a, .nav-cta, .line-link, .scroll-note, .vertical-note,
+  .facts span, .numbered > span, .numbered p,
+  .amenity-list span, .amenity-list b, .amenity-side small,
+  .tab, .gallery-copy p, .gallery-copy .line-link,
+  .apartment-footnote, .quality-no,
+  .metric-top, .metric-card p, .metric-card small,
+  .developer-metric-label, .developer-footnote, .developer-portfolio p,
+  .investment-chart-note, .investment-disclosure,
+  .investment-figure small,
+  .completed-gallery-note, .completed-expand,
+  .reality-gallery-foot, .guru-stack-bottom,
+  .guest-reviews-disclosure,
+  .guest-review-person small,
+  .investment-card .investment-chart-note,
+  .sunset-project-label {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .developer-story-copy .developer-lead {font-size: clamp(27px, 1.8vw, 36px);}
+  .developer-metrics .developer-metric-label {font-size: 14px;}
+  .developer-metrics .developer-metric-value {font-size: min(7.8cqi, 120px);}
+  .developer-portfolio p {max-width: 800px;}
+  .developer-footnote {max-width: 550px;}
+
+  /* Small print in cards and testimonial sections */
+  .quality .quality-card-grid-nine .quality-feature-card p,
+  .gallery-copy p, .guest-review-person strong,
+  .investment-card-top, .investment-card .investment-disclosure,
+  .guest-reviews-header .guest-reviews-intro {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Preserve all original columns / image dimensions / page structure. */
+}
