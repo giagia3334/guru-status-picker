@@ -30,6 +30,8 @@ html.vx-only .scroll-reveal-pending{opacity:1!important;transform:none!important
 .vx-seg button:hover{color:var(--vx-ink);background:rgba(255,255,255,.06)}
 .vx-seg button[aria-pressed="true"]{background:#fff;color:#101b24}
 .vx-seg button .vx-tick{display:none;margin-left:4px;font-size:11px}
+.vx-seg button.vx-picked{background:#1f9d55!important;color:#fff!important}
+.vx-list .vx-p:not(.vx-none){color:#3ddc84}
 .vx-seg button.vx-picked .vx-tick{display:inline}
 .vx-seg button:disabled{opacity:.3;cursor:default}
 .vx-icon{height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--vx-line)!important;color:var(--vx-dim)!important;display:inline-flex;align-items:center;gap:6px}
@@ -57,6 +59,10 @@ html.vx-only .scroll-reveal-pending{opacity:1!important;transform:none!important
  .vx-seg{flex:1}.vx-seg button{flex:1}
 }
 @media print{#vx-dock{display:none}}
+
+.vx-badge{position:absolute;z-index:60;top:16px;left:16px;padding:7px 12px;border-radius:999px;background:#1f9d55;color:#fff;font:600 11px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+.vx-badge.vx-badge-hero{top:104px}
+html.vx-only .vx-badge{display:none}
 </style></head>
 <body>
 <header class="nav" id="nav"><a aria-label="Guru Status home" class="brand" href="#top"><img alt="Guru Holding" src="logo-white.png"/><span class="brand-separator"></span><span class="brand-status">STATUS</span></a><nav aria-label="Main navigation" id="site-nav"><a href="#completed">The Residence</a><a href="#finishing">Finishing Options</a><a href="#amenities">Amenities</a><a href="#quality">Quality</a></nav><a class="nav-cta" href="#contact">ENQUIRE <span>↗</span></a><button aria-expanded="false" aria-label="Open menu" class="menu-toggle"><span></span><span></span></button></header>
@@ -6912,7 +6918,7 @@ html.vx-only .scroll-reveal-pending{opacity:1!important;transform:none!important
   // the Black Friday pop-up would cover the picker every 30 s of a review; keep it for the live site only
   var bfd = document.querySelector('.black-friday'); if (bfd) bfd.showModal = function () {};
 
-  var S = { picks: {}, notes: {}, updated: 0 }, ref = null, timer = null, current = sets[0] && sets[0].dataset.sec;
+  var S = { picks: {"amenities": "B", "completed": "C", "contact": "A", "developer": "B", "finishing": "C", "footer": "C", "gallery": "B", "google-reviews": "A", "investment": "A", "neighborhood": "C", "quality": "B", "showroom": "A"}, notes: {}, updated: 0 }, ref = null, timer = null, current = sets[0] && sets[0].dataset.sec;
   try { var l = JSON.parse(localStorage.getItem('guru-site-picker') || 'null'); if (l && l.picks) S = Object.assign(S, l); } catch (e) {}
 
   var dock = document.createElement('div');
@@ -6954,6 +6960,21 @@ html.vx-only .scroll-reveal-pending{opacity:1!important;transform:none!important
       list.appendChild(b);
     });
   }
+  function badges() {
+    sets.forEach(function (s) {
+      s.querySelectorAll('.vx-badge').forEach(function (b) { b.remove(); });
+      var p = S.picks[s.dataset.sec]; if (!p) return;
+      var o = s.querySelector('.vopt[data-v="' + p + '"]'); if (!o) return;
+      var r = o.firstElementChild;
+      while (r && /^(STYLE|SCRIPT|LINK)$/.test(r.tagName)) r = r.nextElementSibling;
+      if (!r) return;
+      if (getComputedStyle(r).position === 'static') r.style.position = 'relative';
+      var b = document.createElement('div');
+      b.className = 'vx-badge' + (s.dataset.sec === 'hero' ? ' vx-badge-hero' : '');
+      b.textContent = '✓ Picked: ' + p;
+      r.appendChild(b);
+    });
+  }
   function paint() {
     var set = byKey[current]; if (!set) return;
     var i = sets.indexOf(set);
@@ -6970,6 +6991,7 @@ html.vx-only .scroll-reveal-pending{opacity:1!important;transform:none!important
     var done = sets.filter(function (s) { return S.picks[s.dataset.sec]; }).length;
     $('vx-progress').textContent = done + ' of ' + sets.length + ' sections picked';
     paintList();
+    badges();
   }
   function save() {
     S.updated = Date.now();
